@@ -15,7 +15,9 @@
     }
     var download = function() {
       var blob = new Blob([$('#binOut')[0].value], {type: "text/plain;charset=utf-8"});
-      saveAs(blob, "file.mif");
+      var fileName = $('#filename')[0].value;
+      if (fileName == "") {fileName = "ES575"};
+      saveAs(blob, fileName + ".mif");
     }
   </script>
 </head>
@@ -25,7 +27,8 @@
   <p>
     <input type="button" value="Assemble!" onclick="assemble()">
     &nbsp;
-    <input type="button" value="Download Binary" onclick="download()">
+    <input type="button" value="Download Binary" onclick="download()"> 
+    <input type="text" id="filename" placeholder="filename">.mif
   </p>
   <p>
     <textarea id="codeIn" style="width: 49%; height: 40em"></textarea>
