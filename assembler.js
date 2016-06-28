@@ -6,20 +6,35 @@ var assembler = {
     this.code = [];
     this.data = [];
     this.labels = {};
-		this.numberOfInstructions = 0;
+		this.linesCount = 0;
 		this.instructions = [];
 		this.output = "";
+		this.mif = "";
 		var regex = /([a-z]*)\s*R([0-9]),(R([1-9])|#([0-9]*))/gi;
 		var matches;
 		while ((matches = regex.exec(code)) !== null) {
-			// console.log(matches);
 			this.instructions.push(new Instruction(matches[1],matches[2],matches[4],matches[5]))
 		}
-		// console.log(this.instructions);
 		for (var instr in this.instructions) {
-			this.output += decoder.decode(this.instructions[instr]);
+			var newLines;
+			newLines = decoder.decode(this.instructions[instr]);
+			for (var line in newLines) {
+				this.output += this.linesCount.toString(16) + " : " + newLines[line] + ";\n";
+				this.linesCount++;
+			}
+			// this.output += newOutput;
 		}
-		return this.output;
+		
+		this.mif += "DEPTH = 256;\n";
+		this.mif += "WIDTH = 16;\n";
+		this.mif += "ADDRESS_RADIX = HEX;\n";
+		this.mif += "DATA_RADIX = BIN;\n";
+		this.mif += "CONTENT\n";
+		this.mif += "BEGIN\n\n";
+		this.mif += this.output;
+		this.mif += "\nEND;\n";
+		
+		return this.mif;
 	}
 };
 

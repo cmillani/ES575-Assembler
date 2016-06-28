@@ -2,6 +2,7 @@
 
 var decoder = {
 	decode: function(instr) {
+		var lines = []
 		var decoded;
 		switch (instr.instr) {
 			case "mv":
@@ -31,10 +32,11 @@ var decoder = {
 		decoded += str1.substring(str1.length - 3) + str2.substring(str2.length - 3);
 		decoded = "0000000" + decoded;
 		decoded = decoded.substring(decoded.length-16);
+		lines.push(decoded);
 		if (instr.immed != null) {
 			var str3 = "000000000000000" + instr.immed.toString(2);
-			decoded += str3.substring(str3.length-16);
+			lines.push(str3.substring(str3.length-16));
 		}
-		return decoded;
+		return lines;
 	}
 }
