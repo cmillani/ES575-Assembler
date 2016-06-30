@@ -34,7 +34,7 @@ var decoder = {
 		decoded = decoded.substring(decoded.length-16);
 		lines.push(decoded);
 		if (instr.immed != null) {
-			var str3 = "000000000000000" + instr.immed.toString(2);
+			var str3 = "000000000000000" + (instr.immed | 0).toString(2);
 			lines.push(str3.substring(str3.length-16));
 		}
 		return lines;

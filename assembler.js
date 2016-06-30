@@ -10,7 +10,7 @@ var assembler = {
 		this.instructions = [];
 		this.output = "";
 		this.mif = "";
-		var regex = /([a-z]*)\s*R([0-9]),(R([1-9])|#([0-9]*))/gi;
+		var regex = /([a-z]+)\s+R([0-9]),\s*(R([0-9])|#([0-9]+))/gi;
 		var matches;
 		while ((matches = regex.exec(code)) !== null) {
 			this.instructions.push(new Instruction(matches[1],matches[2],matches[4],matches[5]))
@@ -25,7 +25,7 @@ var assembler = {
 			// this.output += newOutput;
 		}
 		
-		this.mif += "DEPTH = 256;\n";
+		this.mif += "DEPTH = 32;\n";
 		this.mif += "WIDTH = 16;\n";
 		this.mif += "ADDRESS_RADIX = HEX;\n";
 		this.mif += "DATA_RADIX = BIN;\n";
