@@ -25,7 +25,7 @@ var assembler = {
 			// this.output += newOutput;
 		}
 		
-		this.mif += "DEPTH = 32;\n";
+		this.mif += "DEPTH = 128;\n";
 		this.mif += "WIDTH = 16;\n";
 		this.mif += "ADDRESS_RADIX = HEX;\n";
 		this.mif += "DATA_RADIX = BIN;\n";
